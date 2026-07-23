@@ -81,6 +81,22 @@
             100% { transform: translateY(-110vh) scale(1.2) rotate(45deg); opacity: 0; }
         }
 
+        /* Magical Glowing Cake Animation */
+        .glowing-cake {
+            animation: cakeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes cakeGlow {
+            from { 
+                filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.4)); 
+                transform: translateY(0); 
+            }
+            to { 
+                filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.9)); 
+                transform: translateY(-10px); 
+            }
+        }
+
         /* Custom Knife Cursor for the Cake */
         .knife-cursor {
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text y='30' font-size='30'>🔪</text></svg>") 0 20, pointer;
@@ -102,22 +118,22 @@
         
         <div class="glass-card w-full p-6 sm:p-10 md:p-12 rounded-[2.5rem] md:rounded-[3rem] flex flex-col items-center text-center gap-4 sm:gap-6">
             
-            <!-- Cute Couple Icon -->
-            <div class="text-5xl md:text-7xl animate-bounce drop-shadow-lg">👩‍❤️‍👨🎂</div>
+            <!-- Bouncing Cake Icon -->
+            <div class="text-5xl md:text-7xl animate-bounce drop-shadow-lg">🎂</div>
             
             <!-- Titles -->
             <div class="space-y-1 sm:space-y-2">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-rose-500 drop-shadow-sm tracking-wide">
-                    Happy Birthday My Love!
+                    Happy Birthday!
                 </h1>
                 <h2 class="text-2xl sm:text-4xl md:text-5xl font-semibold text-pink-600 flex items-center justify-center gap-2">
                     Priyaaaa <span class="text-3xl md:text-4xl">😸</span>
                 </h2>
             </div>
 
-            <!-- Romantic Hinglish Message -->
+            <!-- Previous Hinglish Message -->
             <p class="text-sm sm:text-base md:text-xl text-gray-800 font-medium px-2 sm:px-8 leading-relaxed">
-                Meri pyari Priyaaaa, duniya ki sabse cute ladki ko happy birthday! 🥰 Tumhare aane se meri life poori magic ban gayi hai. Hamesha aise hi mere sath muskurate rehna. I love youuuu the mostttt! ♾️💘
+                Duniya ke sabse amazing insaan ko birthday ki bohot bohot badhai! Tumhara aaj ka din pyaar, hasi, aur bohot saare cake se bhara ho. Tumhare hone se hi ye duniya kitni pyari lagti hai. 💖
             </p>
 
             <!-- Glowing Surprise Button (Now opens modal) -->
@@ -144,9 +160,11 @@
             
             <h3 id="modalTitle" class="text-3xl md:text-4xl font-bold text-rose-500 mb-6 drop-shadow-sm">Make a wish, love! ✨</h3>
 
-            <!-- The Cake (Click to cut) -->
-            <div id="theCake" onclick="cutCake()" class="text-8xl md:text-9xl hover:scale-110 transition-transform duration-300 drop-shadow-xl select-none knife-cursor my-4">
-                🎂
+            <!-- The Big Magical Cake (Click to cut) -->
+            <div id="theCakeWrapper" class="glowing-cake">
+                <div id="theCake" onclick="cutCake()" class="text-[100px] md:text-[130px] hover:scale-110 transition-transform duration-300 select-none knife-cursor my-2 leading-none">
+                    🎂
+                </div>
             </div>
             
             <p id="modalInstruction" class="text-lg text-gray-700 mt-6 font-medium animate-pulse text-pink-600">Tap the cake to cut it! 🔪</p>
@@ -164,6 +182,7 @@
         const modal = document.getElementById('cakeModal');
         const modalContent = document.getElementById('cakeModalContent');
         const cake = document.getElementById('theCake');
+        const cakeWrapper = document.getElementById('theCakeWrapper');
         const modalTitle = document.getElementById('modalTitle');
         const modalInstruction = document.getElementById('modalInstruction');
         const closeModalBtn = document.getElementById('closeModalBtn');
@@ -194,6 +213,7 @@
                 if(cakeCut) {
                     cake.innerHTML = '🎂';
                     cake.style.transform = 'scale(1) rotate(0deg)';
+                    cakeWrapper.classList.add('glowing-cake'); // bring back the magical floating glow
                     modalTitle.innerText = 'Make a wish, love! ✨';
                     modalInstruction.innerText = 'Tap the cake to cut it! 🔪';
                     modalInstruction.classList.remove('hidden');
@@ -208,6 +228,9 @@
                 cakeCut = true;
                 // Change emoji to sliced cake
                 cake.innerHTML = '🍰✨'; 
+                // Stop the gentle floating glow so it looks like it landed
+                cakeWrapper.classList.remove('glowing-cake');
+                
                 // Add a cute little slice animation bump
                 cake.style.transform = 'scale(1.2) rotate(-5deg)';
                 setTimeout(() => { cake.style.transform = 'scale(1.1) rotate(0deg)'; }, 300);
