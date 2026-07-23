@@ -44,6 +44,15 @@
                        floatCard 6s ease-in-out infinite alternate 1s;
         }
 
+        /* Modal specific glass styling */
+        .modal-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
         @keyframes popIn {
             0% { opacity: 0; transform: translateY(50px) scale(0.9); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -70,6 +79,11 @@
             20% { opacity: 0.7; }
             80% { opacity: 0.5; }
             100% { transform: translateY(-110vh) scale(1.2) rotate(45deg); opacity: 0; }
+        }
+
+        /* Custom Knife Cursor for the Cake */
+        .knife-cursor {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text y='30' font-size='30'>🔪</text></svg>") 0 20, pointer;
         }
     </style>
 </head>
@@ -106,8 +120,8 @@
                 Meri pyari Priyaaaa, duniya ki sabse cute ladki ko happy birthday! 🥰 Tumhare aane se meri life poori magic ban gayi hai. Hamesha aise hi mere sath muskurate rehna. I love youuuu the mostttt! ♾️💘
             </p>
 
-            <!-- Glowing Surprise Button -->
-            <button onclick="fireConfetti()" class="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-rose-400 via-pink-400 to-rose-400 background-size-[200%] text-white font-bold text-base sm:text-xl rounded-full shadow-[0_5px_15px_rgba(244,63,94,0.4)] hover:shadow-[0_0_30px_rgba(244,63,94,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden mt-2 border-2 border-white/60">
+            <!-- Glowing Surprise Button (Now opens modal) -->
+            <button onclick="openModal()" class="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-rose-400 via-pink-400 to-rose-400 background-size-[200%] text-white font-bold text-base sm:text-xl rounded-full shadow-[0_5px_15px_rgba(244,63,94,0.4)] hover:shadow-[0_0_30px_rgba(244,63,94,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden mt-2 border-2 border-white/60">
                 <span class="relative z-10 flex items-center gap-2">
                     A Cute Surprise For Us! <span class="group-hover:animate-ping inline-block">✨</span>
                 </span>
@@ -123,11 +137,94 @@
         </div>
     </main>
 
+    <!-- Interactive Cake Modal Overlay -->
+    <div id="cakeModal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-500">
+        <!-- Modal Content Box -->
+        <div id="cakeModalContent" class="modal-glass transform scale-90 transition-transform duration-500 w-11/12 max-w-md p-8 md:p-12 rounded-[3rem] flex flex-col items-center text-center relative border-2 border-pink-200">
+            
+            <h3 id="modalTitle" class="text-3xl md:text-4xl font-bold text-rose-500 mb-6 drop-shadow-sm">Make a wish, love! ✨</h3>
+
+            <!-- The Cake (Click to cut) -->
+            <div id="theCake" onclick="cutCake()" class="text-8xl md:text-9xl hover:scale-110 transition-transform duration-300 drop-shadow-xl select-none knife-cursor my-4">
+                🎂
+            </div>
+            
+            <p id="modalInstruction" class="text-lg text-gray-700 mt-6 font-medium animate-pulse text-pink-600">Tap the cake to cut it! 🔪</p>
+
+            <!-- Close Button (Shows after cutting) -->
+            <button id="closeModalBtn" onclick="closeModal()" class="hidden mt-8 px-8 py-3 bg-rose-400 text-white font-bold rounded-full shadow-lg hover:bg-rose-500 hover:scale-105 transition-all duration-300">
+                Back to card 💖
+            </button>
+        </div>
+    </div>
+
     <!-- JavaScript for interactive features -->
     <script>
-        // Confetti function using canvas-confetti
+        // --- Modal & Cake Cutting Logic ---
+        const modal = document.getElementById('cakeModal');
+        const modalContent = document.getElementById('cakeModalContent');
+        const cake = document.getElementById('theCake');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalInstruction = document.getElementById('modalInstruction');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        let cakeCut = false;
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            // Trigger reflow for animation
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            modalContent.classList.remove('scale-90');
+            modalContent.classList.add('scale-100');
+            
+            // Play a small soft burst when opening the modal
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 }, colors: ['#ffb3ba', '#ffffff'] });
+        }
+
+        function closeModal() {
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-90');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // Reset the cake for next time she clicks it!
+                if(cakeCut) {
+                    cake.innerHTML = '🎂';
+                    cake.style.transform = 'scale(1) rotate(0deg)';
+                    modalTitle.innerText = 'Make a wish, love! ✨';
+                    modalInstruction.innerText = 'Tap the cake to cut it! 🔪';
+                    modalInstruction.classList.remove('hidden');
+                    closeModalBtn.classList.add('hidden');
+                    cakeCut = false;
+                }
+            }, 500);
+        }
+
+        function cutCake() {
+            if (!cakeCut) {
+                cakeCut = true;
+                // Change emoji to sliced cake
+                cake.innerHTML = '🍰✨'; 
+                // Add a cute little slice animation bump
+                cake.style.transform = 'scale(1.2) rotate(-5deg)';
+                setTimeout(() => { cake.style.transform = 'scale(1.1) rotate(0deg)'; }, 300);
+
+                // Update text
+                modalTitle.innerText = 'Yayyy! Happy Birthday! 🎉';
+                modalInstruction.classList.add('hidden'); // hide instructions
+                closeModalBtn.classList.remove('hidden'); // show close button
+
+                // Trigger the BIG romantic confetti explosion
+                fireConfetti();
+            }
+        }
+
+        // --- Confetti Logic ---
         function fireConfetti() {
-            var duration = 3 * 1000;
+            var duration = 4 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
 
@@ -160,7 +257,7 @@
             }, 250);
         }
 
-        // Fire a soft burst on load automatically
+        // Fire a soft burst on initial page load automatically
         window.onload = function() {
             setTimeout(() => {
                 confetti({
