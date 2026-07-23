@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Priyaaaa! 🎂</title>
+    <title>Happy Birthday Priyaaaa! 💘</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for a cute, rounded look -->
@@ -14,15 +14,15 @@
     <style>
         body {
             font-family: 'Fredoka', sans-serif;
-            overflow: hidden; /* This strictly prevents any scrolling */
+            overflow: hidden; /* Strictly prevents scrolling */
             margin: 0;
             height: 100vh;
             width: 100vw;
         }
 
-        /* Cozy animated pastel sunset background */
-        .cozy-bg {
-            background: linear-gradient(-45deg, #ffc3a0, #ffafbd, #fbc2eb, #a18cd1, #ffc3a0);
+        /* Romantic soft pink and peach gradient */
+        .romantic-bg {
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ffc3a0, #ffafbd);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
         }
@@ -33,13 +33,13 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Glassmorphism Card with entrance and floating animation */
+        /* Glassmorphism Card with a soft pinkish glow */
         .glass-card {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 192, 203, 0.6);
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.8);
             animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
                        floatCard 6s ease-in-out infinite alternate 1s;
         }
@@ -54,63 +54,69 @@
             100% { transform: translateY(-12px); }
         }
 
-        /* Floating animation for background emojis */
-        .float-bg { position: absolute; opacity: 0; animation: fadeFloat 8s ease-in-out infinite; }
-        .delay-1 { animation-delay: 1s; animation-duration: 7s; }
-        .delay-2 { animation-delay: 2s; animation-duration: 9s; }
-        .delay-3 { animation-delay: 0.5s; animation-duration: 6s; }
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            bottom: -10%;
+            opacity: 0;
+            animation: floatUp 8s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
 
-        @keyframes fadeFloat {
-            0% { transform: translateY(20px) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.6; }
-            50% { transform: translateY(-30px) rotate(15deg); opacity: 0.8; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(20px) rotate(-5deg); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) scale(1.2) rotate(45deg); opacity: 0; }
         }
     </style>
 </head>
-<body class="cozy-bg flex items-center justify-center relative">
+<body class="romantic-bg flex items-center justify-center relative">
 
-    <!-- Cozy Floating Background Elements -->
-    <div class="float-bg delay-1 top-[15%] left-[10%] text-5xl pointer-events-none drop-shadow-md">✨</div>
-    <div class="float-bg delay-2 top-[60%] left-[15%] text-6xl pointer-events-none drop-shadow-md">🎈</div>
-    <div class="float-bg delay-3 top-[20%] right-[12%] text-6xl pointer-events-none drop-shadow-md">🎁</div>
-    <div class="float-bg top-[70%] right-[10%] text-5xl pointer-events-none drop-shadow-md">🧸</div>
+    <!-- Floating Background Emojis (Couples & Hearts Theme) -->
+    <div class="floating-heart text-4xl" style="left: 10%; animation-delay: 0s; animation-duration: 7s;">💖</div>
+    <div class="floating-heart text-5xl" style="left: 25%; animation-delay: 2s; animation-duration: 9s;">✨</div>
+    <div class="floating-heart text-3xl" style="left: 45%; animation-delay: 4s; animation-duration: 6s;">💘</div>
+    <div class="floating-heart text-5xl" style="left: 70%; animation-delay: 1s; animation-duration: 8s;">🧸</div>
+    <div class="floating-heart text-4xl" style="left: 85%; animation-delay: 3s; animation-duration: 7.5s;">💌</div>
+    <div class="floating-heart text-6xl" style="left: 55%; animation-delay: 5s; animation-duration: 10s;">💖</div>
 
     <!-- Main Centered Container (The Cozy Card) -->
     <main class="w-full max-w-2xl px-4 md:px-0 z-10 flex justify-center items-center">
         
         <div class="glass-card w-full p-6 sm:p-10 md:p-12 rounded-[2.5rem] md:rounded-[3rem] flex flex-col items-center text-center gap-4 sm:gap-6">
             
-            <!-- Bouncing Cake -->
-            <div class="text-5xl md:text-7xl animate-bounce drop-shadow-lg">🎂</div>
+            <!-- Cute Couple Icon -->
+            <div class="text-5xl md:text-7xl animate-bounce drop-shadow-lg">👩‍❤️‍👨🎂</div>
             
             <!-- Titles -->
             <div class="space-y-1 sm:space-y-2">
-                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-pink-500 drop-shadow-sm tracking-wide">
-                    Happy Birthday!
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-rose-500 drop-shadow-sm tracking-wide">
+                    Happy Birthday My Love!
                 </h1>
-                <h2 class="text-2xl sm:text-4xl md:text-5xl font-semibold text-purple-600 flex items-center justify-center gap-2">
+                <h2 class="text-2xl sm:text-4xl md:text-5xl font-semibold text-pink-600 flex items-center justify-center gap-2">
                     Priyaaaa <span class="text-3xl md:text-4xl">😸</span>
                 </h2>
             </div>
 
-            <!-- Sweet Hinglish Message -->
+            <!-- Romantic Hinglish Message -->
             <p class="text-sm sm:text-base md:text-xl text-gray-800 font-medium px-2 sm:px-8 leading-relaxed">
-                Duniya ke sabse amazing insaan ko birthday ki bohot bohot badhai! Tumhara aaj ka din pyaar, hasi, aur bohot saare cake se bhara ho. Tumhare hone se hi ye duniya kitni pyari lagti hai. 💖
+                Meri pyari Priyaaaa, duniya ki sabse cute ladki ko happy birthday! 🥰 Tumhare aane se meri life poori magic ban gayi hai. Hamesha aise hi mere sath muskurate rehna. I love youuuu the mostttt! ♾️💘
             </p>
 
             <!-- Glowing Surprise Button -->
-            <button onclick="fireConfetti()" class="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 background-size-[200%] text-white font-bold text-base sm:text-xl rounded-full shadow-[0_5px_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden mt-2 border-2 border-white/50">
+            <button onclick="fireConfetti()" class="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-rose-400 via-pink-400 to-rose-400 background-size-[200%] text-white font-bold text-base sm:text-xl rounded-full shadow-[0_5px_15px_rgba(244,63,94,0.4)] hover:shadow-[0_0_30px_rgba(244,63,94,0.7)] hover:scale-105 transition-all duration-300 overflow-hidden mt-2 border-2 border-white/60">
                 <span class="relative z-10 flex items-center gap-2">
-                    Click for a Surprise! <span class="group-hover:animate-ping inline-block">🎉</span>
+                    A Cute Surprise For Us! <span class="group-hover:animate-ping inline-block">✨</span>
                 </span>
                 <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
             </button>
 
             <!-- Compact Footer Message -->
-            <div class="mt-2 sm:mt-4 pt-4 border-t-2 border-white/60 w-full flex flex-col gap-1">
-                <h4 class="text-base sm:text-lg md:text-xl text-purple-700 font-semibold drop-shadow-sm">Hope all your wishes come true! ✨</h4>
+            <div class="mt-2 sm:mt-4 pt-4 border-t-2 border-pink-200/60 w-full flex flex-col gap-1">
+                <h4 class="text-base sm:text-lg md:text-xl text-rose-600 font-semibold drop-shadow-sm">Together forever! 🧿✨</h4>
                 <p class="text-xs sm:text-sm md:text-base text-gray-600 font-medium">Made with love by thesh 😸✨</p>
             </div>
 
@@ -138,16 +144,18 @@
 
                 var particleCount = 50 * (timeLeft / duration);
                 
-                // Fall from slightly higher
+                // Romantic Confetti Colors: Reds, Pinks, and Whites
+                const loveColors = ['#ff4d6d', '#ff758f', '#ff8fa3', '#ffb3c1', '#ffffff'];
+
                 confetti(Object.assign({}, defaults, { 
                     particleCount,
                     origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-                    colors: ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#ff69b4', '#dda0dd']
+                    colors: loveColors
                 }));
                 confetti(Object.assign({}, defaults, { 
                     particleCount,
                     origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-                    colors: ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#ff69b4', '#dda0dd']
+                    colors: loveColors
                 }));
             }, 250);
         }
@@ -159,7 +167,7 @@
                     particleCount: 150,
                     spread: 80,
                     origin: { y: 0.6 },
-                    colors: ['#ffc3a0', '#ffafbd', '#fbc2eb', '#ffffff']
+                    colors: ['#ff4d6d', '#ff758f', '#ffffff']
                 });
             }, 600);
         };
